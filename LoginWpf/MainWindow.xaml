@@ -1,0 +1,149 @@
+﻿<Window x:Class="LoginWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LoginWpf"
+        xmlns:userControls="clr-namespace:LoginWpf.UserControls"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="645" Width="875" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent" FontSize="18" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Window.Resources>
+        <Style TargetType="Border" x:Key="InputBorder">
+            <Setter Property="Width" Value="320" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Background" Value="#80c0ff" />
+            <Setter Property="Opacity" Value="0.7" />
+            <Setter Property="Margin" Value="0,6,0,0" />
+        </Style>
+    </Window.Resources>
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.25*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Effect>
+            <DropShadowEffect BlurRadius="30" ShadowDepth="1" Opacity="0.4"/>
+        </Grid.Effect>
+        <Border Background="#6a7eee" CornerRadius="10 0 0 10" ClipToBounds="True">
+            <Border.Clip>
+                <RectangleGeometry Rect="0,0,400,605" RadiusX="10" RadiusY="10"/>
+            </Border.Clip>
+            <Grid>
+                <StackPanel Margin="0 120 0 0" VerticalAlignment="Top">
+                    <TextBlock FontWeight="Light" FontSize="46" Foreground="White" TextAlignment="Center" Text="欢迎使用"/>
+                    <TextBlock FontWeight="Light" FontSize="18" Foreground="White" TextAlignment="Center" Text="XXXXX系统"/>
+                    <TextBlock FontWeight="Light" FontSize="18" Foreground="White" TextAlignment="Center" Text="请先登录"/>
+                </StackPanel>
+
+                <Ellipse Width="500" Height="500" 
+                     VerticalAlignment="Bottom" 
+                     Fill="#80c0ff" 
+                     Margin="50,0,0,-200" 
+                     Opacity="0.6">
+                    <Ellipse.RenderTransform>
+                        <TranslateTransform x:Name="FloatingTransform1" Y="0"/>
+                    </Ellipse.RenderTransform>
+                    <Ellipse.Triggers>
+                        <EventTrigger RoutedEvent="Ellipse.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                                    <!-- 在 4 秒内，Y 轴向上平滑移动 30 像素 -->
+                                    <DoubleAnimation Storyboard.TargetName="FloatingTransform1"
+                                             Storyboard.TargetProperty="Y"
+                                             To="-30" 
+                                             Duration="0:0:4"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Ellipse.Triggers>
+                </Ellipse>
+                <Ellipse Width="300" Height="300" VerticalAlignment="Bottom" Fill="#83c2ff" Margin="-450 0 0 30" Opacity="0.3">
+                    <Ellipse.RenderTransform>
+                        <TranslateTransform x:Name="FloatingTransform2" Y="0"/>
+                    </Ellipse.RenderTransform>
+                    <Ellipse.Triggers>
+                        <EventTrigger RoutedEvent="Ellipse.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                                    <DoubleAnimation Storyboard.TargetName="FloatingTransform2"
+                                             Storyboard.TargetProperty="Y"
+                                             To="-50" 
+                                             Duration="0:0:3"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Ellipse.Triggers>
+                </Ellipse>
+                <Ellipse Width="400" Height="400" VerticalAlignment="Bottom" Fill="#84c3ff" Margin="-320 0 0 -120" Opacity="0.3"/>
+                <Ellipse Width="250" Height="250" VerticalAlignment="Bottom" Fill="#81c2ff" Margin="-380 0 0 -120" />
+                <Ellipse Width="400" Height="400" VerticalAlignment="Bottom" Fill="#87c5ff" Margin="280 0 0 -70" Opacity="0.8">
+                    <Ellipse.RenderTransform>
+                        <TranslateTransform x:Name="FloatingTransform6" X="0"/>
+                    </Ellipse.RenderTransform>
+                    <Ellipse.Triggers>
+                        <EventTrigger RoutedEvent="Ellipse.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                                    <DoubleAnimation Storyboard.TargetName="FloatingTransform6"
+                                             Storyboard.TargetProperty="X"
+                                             To="30" 
+                                             Duration="0:0:3"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Ellipse.Triggers>
+                </Ellipse>
+            </Grid>
+        </Border>
+        <Border Grid.Column="1" Background="White" CornerRadius="0 10 10 0">
+            <StackPanel>
+                <Button x:Name="btnExitApp" Style="{StaticResource CloseButtonStyle}" Margin="0,5,5,0" BorderThickness="0" HorizontalAlignment="Right" Content="X" Click="btnExitApp_Click" />
+                <Grid Margin="60 0 60 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="1" Margin="0,80,0,20">
+                        <Border Width="320" CornerRadius="5" Height="40" Background="#80c0ff" Opacity="0.7">
+                            <Grid Margin="6">
+                                <userControls:LoginInput x:Name="txtUserName" PlaceHolder="UserName" TextValue="Admin" />
+                            </Grid>
+                        </Border>
+
+                        <Border Style="{StaticResource InputBorder}">
+                            <Grid Margin="6">
+                                <userControls:LoginInput x:Name="txtEmail" PlaceHolder="Email" TextValue="12@qq.com" />
+                            </Grid>
+                        </Border>
+
+                        <Border Style="{StaticResource InputBorder}">
+                            <Grid Margin="6">
+                                <userControls:PassInput x:Name="txtPassword" PlaceHolder="Password" TextValue="1234" />
+                            </Grid>
+                        </Border>
+
+                        <Border Style="{StaticResource InputBorder}">
+                            <Grid Margin="6">
+                                <userControls:PassInput x:Name="txtConfirmPassword" PlaceHolder="Confirm Password" TextValue="1234" />
+                            </Grid>
+                        </Border>
+
+                        <CheckBox HorizontalAlignment="Left" Margin="10 10 0 0">
+                            <TextBlock VerticalAlignment="Center" FontSize="14"  Text="I Agree"/>
+                        </CheckBox>
+                    </StackPanel>
+
+                    <Border VerticalAlignment="Top" Grid.Row="2" Background="#6a7eee" Height="50" Width="250" CornerRadius="10">
+                        <Button x:Name="btnLogin" Content="登录" Background="Transparent" Margin="5" Foreground="White" FontSize="23" BorderThickness="0" Click="btnLogin_Click" />
+                    </Border>
+
+                </Grid>
+            </StackPanel>
+
+        </Border>
+    </Grid>
+</Window>

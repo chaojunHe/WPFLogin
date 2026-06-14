@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="LoginWpf.UserControls.PassInput"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LoginWpf.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="200">
+    <Grid>
+        <TextBlock x:Name="tbPlaceHolder" FontSize="16"
+            VerticalAlignment="Center" 
+            Foreground="WhiteSmoke"
+            Text="{Binding PlaceHolder, UpdateSourceTrigger=PropertyChanged}"
+            Margin="5,0,0,0"/>
+
+        <!-- 密码模式下显示 -->
+        <PasswordBox x:Name="SecretPasswordBox"
+                     Visibility="Visible"
+                     VerticalAlignment="Center"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     FontSize="16"
+                     PasswordChanged="SecretPasswordBox_PasswordChanged" />
+        
+        <!-- 明文模式下显示 -->
+        <TextBox x:Name="NormalTextBox"
+                 Visibility="Collapsed"
+                 Background="Transparent" 
+                 VerticalAlignment="Center"
+                 BorderThickness="0" 
+                 FontSize="16"
+                 TextChanged="NormalTextBox_TextChanged"
+                 />
+
+        <ToggleButton  x:Name="EyeBtn"
+                       Content="👁‍🗨"
+                       IsChecked="False"          
+                       FontSize="16" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Right"
+                       BorderThickness="0"
+                       Margin="0,0,20,0"
+                       Background="Transparent"
+                       Checked="EyeBtn_Click" Unchecked="EyeBtn_Click"/>
+        <Button 
+            x:Name="btnClear"
+            Content="X"  
+            FontSize="16" 
+            VerticalAlignment="Center" 
+            HorizontalAlignment="Right"
+            Foreground="LightGray"
+            BorderThickness="0"
+            Background="Transparent"          
+            Margin="0,0,5,0" Click="btnClear_Click" />
+    </Grid>
+</UserControl>
